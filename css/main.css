@@ -1,0 +1,538 @@
+/* ==========================================================================
+   MH Works Ltd — splash page design system
+   Typographic and colour language adapted from voxelflow.io: Inter, an oklch
+   dark surface, the cyan → violet → magenta brand gradient, and the layered
+   backdrop (aurora → dot grid → particle field → scrim → content).
+
+   Inter is self-hosted from /fonts. privacy.html states that GitHub Pages is
+   the only third party a visitor's browser talks to, so the page must not
+   pull webfonts from Google.
+   ========================================================================== */
+
+@font-face {
+	font-family: 'Inter';
+	font-style: normal;
+	font-weight: 400 700;
+	font-display: swap;
+	src: url('../fonts/inter-latin.woff2') format('woff2');
+	unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+		U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+		U+FEFF, U+FFFD;
+}
+@font-face {
+	font-family: 'Inter';
+	font-style: normal;
+	font-weight: 400 700;
+	font-display: swap;
+	src: url('../fonts/inter-latin-ext.woff2') format('woff2');
+	unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF,
+		U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB,
+		U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* --- minimal normalise ---------------------------------------------------- */
+*,
+*::after,
+*::before {
+	box-sizing: border-box;
+}
+main,
+header,
+footer,
+nav,
+section {
+	display: block;
+}
+
+:root {
+	font-size: 16px;
+
+	--radius: 0.625rem;
+	--radius-md: calc(var(--radius) - 2px);
+	--radius-lg: var(--radius);
+	--radius-full: 999px;
+
+	--background: oklch(0.145 0.012 252);
+	--foreground: oklch(0.93 0.008 255);
+	--muted-foreground: oklch(0.66 0.015 257);
+	--primary: oklch(0.8 0.13 205);
+	--primary-foreground: oklch(0.16 0.04 215);
+	--border: oklch(0.3 0.02 264);
+	--info: oklch(0.72 0.13 230);
+	--accent-magenta: oklch(0.7 0.2 330);
+	--ring: oklch(0.8 0.13 205);
+}
+
+body {
+	margin: 0;
+	min-height: 100vh;
+	overflow-x: hidden;
+	color: var(--foreground);
+	background-color: var(--background);
+	font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Arial,
+		sans-serif;
+	font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	line-height: 1.5;
+}
+
+a {
+	color: var(--primary);
+	text-decoration: none;
+	outline: none;
+}
+a:hover,
+a:focus-visible {
+	color: color-mix(in oklab, var(--primary) 80%, white);
+}
+
+/* ==========================================================================
+   Background stack
+   z-order (back → front): aurora (0) · dot grid (1) · particle field (2) ·
+   scrim (3) · page content (4)
+   ========================================================================== */
+
+/* The WebGL renderer mounts its <canvas> here. It clears to transparent, so
+   the aurora and grid below show through the gaps between particles. If WebGL2
+   is unavailable the container simply stays empty and the aurora carries the
+   page on its own. */
+.field {
+	position: fixed;
+	inset: 0;
+	z-index: 2;
+}
+.field canvas {
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+
+.bg-aurora {
+	position: fixed;
+	inset: 0;
+	z-index: 0;
+	overflow: hidden;
+	background: var(--background);
+}
+.bg-aurora .blob {
+	position: absolute;
+	border-radius: 50%;
+	filter: blur(90px);
+	opacity: 0.9;
+	will-change: transform;
+}
+.blob--1 {
+	top: -20%;
+	left: -10%;
+	width: 55vw;
+	height: 55vw;
+	background: radial-gradient(
+		circle at center,
+		color-mix(in oklab, var(--primary) 22%, transparent),
+		transparent 70%
+	);
+	animation: blob-1 26s ease-in-out infinite alternate;
+}
+.blob--2 {
+	top: 6%;
+	right: -15%;
+	width: 50vw;
+	height: 50vw;
+	background: radial-gradient(
+		circle at center,
+		color-mix(in oklab, var(--info) 22%, transparent),
+		transparent 70%
+	);
+	animation: blob-2 32s ease-in-out infinite alternate;
+}
+.blob--3 {
+	bottom: -25%;
+	left: 18%;
+	width: 60vw;
+	height: 45vw;
+	background: radial-gradient(
+		circle at center,
+		color-mix(in oklab, var(--accent-magenta) 14%, transparent),
+		transparent 70%
+	);
+	animation: blob-3 38s ease-in-out infinite alternate;
+}
+@keyframes blob-1 {
+	from {
+		transform: translate(0, 0) scale(1);
+	}
+	to {
+		transform: translate(80px, 70px) scale(1.12);
+	}
+}
+@keyframes blob-2 {
+	from {
+		transform: translate(0, 0) scale(1);
+	}
+	to {
+		transform: translate(-90px, 50px) scale(0.92);
+	}
+}
+@keyframes blob-3 {
+	from {
+		transform: translate(0, 0) scale(1);
+	}
+	to {
+		transform: translate(60px, -50px) scale(1.1);
+	}
+}
+
+.bg-grid {
+	position: fixed;
+	inset: 0;
+	z-index: 1;
+	pointer-events: none;
+	background-image: radial-gradient(
+		color-mix(in oklab, var(--foreground) 8%, transparent) 1px,
+		transparent 1px
+	);
+	background-size: 22px 22px;
+	opacity: 0.5;
+	-webkit-mask-image: radial-gradient(ellipse 120% 100% at 50% 40%, #000 55%, transparent 100%);
+	mask-image: radial-gradient(ellipse 120% 100% at 50% 40%, #000 55%, transparent 100%);
+}
+
+/* Darkens the left of the viewport so the hero copy reads over the particle
+   field; fades out to the right where the field should stay crisp. */
+.scrim {
+	position: fixed;
+	inset: 0;
+	z-index: 3;
+	pointer-events: none;
+	background: linear-gradient(
+		100deg,
+		color-mix(in oklab, var(--background) 92%, transparent) 0%,
+		color-mix(in oklab, var(--background) 80%, transparent) 38%,
+		color-mix(in oklab, var(--background) 34%, transparent) 62%,
+		transparent 84%
+	);
+}
+
+/* ==========================================================================
+   Page shell
+   ========================================================================== */
+
+/* The overlay never eats pointer events meant for the particle field
+   underneath; only genuinely interactive children opt back in. */
+.page {
+	position: relative;
+	z-index: 4;
+	min-height: 100vh;
+	min-height: 100svh;
+	display: grid;
+	grid-template-rows: auto 1fr auto;
+	padding: clamp(1.25rem, 3.5vw, 2.75rem);
+	pointer-events: none;
+}
+.site-header,
+.hero,
+.site-footer {
+	pointer-events: auto;
+}
+
+/* --- header --------------------------------------------------------------- */
+.site-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1rem;
+}
+.brand {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.6rem;
+	color: var(--foreground);
+}
+.brand:hover {
+	color: var(--foreground);
+}
+.brand__mark {
+	width: 2.1rem;
+	height: 2.1rem;
+	display: block;
+	filter: drop-shadow(0 2px 10px color-mix(in oklab, var(--primary) 35%, transparent));
+}
+.brand__name {
+	font-size: 1.2rem;
+	font-weight: 600;
+	letter-spacing: -0.02em;
+}
+
+.site-nav {
+	display: flex;
+	align-items: center;
+	gap: 1.25rem;
+}
+.nav-link {
+	color: var(--muted-foreground);
+	font-size: 0.9rem;
+	font-weight: 500;
+}
+.nav-link:hover {
+	color: var(--foreground);
+}
+
+/* --- hero ----------------------------------------------------------------- */
+.hero {
+	align-self: center;
+	max-width: 44rem;
+	padding: clamp(1.5rem, 5vh, 4rem) 0;
+	/* Soft dark halo keeps copy readable where it crosses bright particles. */
+	text-shadow: 0 1px 22px color-mix(in oklab, var(--background) 78%, transparent);
+}
+.eyebrow {
+	margin: 0 0 1.1rem;
+	font-size: 0.78rem;
+	font-weight: 600;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	color: color-mix(in oklab, var(--primary) 78%, var(--foreground));
+}
+.hero__title {
+	margin: 0 0 1.4rem;
+	font-size: clamp(2.5rem, 6vw, 4.25rem);
+	font-weight: 600;
+	line-height: 1.03;
+	letter-spacing: -0.03em;
+	text-wrap: balance;
+}
+.text-gradient-brand {
+	background-image: linear-gradient(
+		100deg,
+		oklch(0.8 0.14 200),
+		oklch(0.62 0.22 295) 55%,
+		oklch(0.68 0.22 330)
+	);
+	-webkit-background-clip: text;
+	background-clip: text;
+	color: transparent;
+}
+.hero__lead {
+	margin: 0 0 1.1rem;
+	max-width: 38rem;
+	font-size: clamp(1.02rem, 1.5vw, 1.2rem);
+	color: color-mix(in oklab, var(--foreground) 82%, transparent);
+}
+
+/* --- fact pills ----------------------------------------------------------- */
+.pills {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.55rem;
+	margin: 1.9rem 0 2.4rem;
+	padding: 0;
+	list-style: none;
+}
+.pill {
+	padding: 0.4rem 0.85rem;
+	font-size: 0.82rem;
+	font-weight: 500;
+	color: color-mix(in oklab, var(--foreground) 88%, transparent);
+	background: color-mix(in oklab, var(--background) 45%, transparent);
+	border: 1px solid color-mix(in oklab, var(--primary) 30%, var(--border));
+	border-radius: var(--radius-full);
+	backdrop-filter: blur(6px);
+	-webkit-backdrop-filter: blur(6px);
+}
+
+/* --- buttons -------------------------------------------------------------- */
+.hero__actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.85rem;
+}
+.btn {
+	position: relative;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.5rem;
+	height: 2.5rem;
+	padding: 0 1.15rem;
+	border: 1px solid transparent;
+	border-radius: var(--radius-md);
+	font: inherit;
+	font-size: 0.9rem;
+	font-weight: 600;
+	white-space: nowrap;
+	cursor: pointer;
+	overflow: hidden;
+	transition: transform 0.12s ease, background-color 0.15s ease, box-shadow 0.15s ease,
+		border-color 0.15s ease, color 0.15s ease;
+}
+.btn:active {
+	transform: scale(0.985);
+}
+.btn:focus-visible {
+	outline: none;
+	box-shadow: 0 0 0 3px color-mix(in oklab, var(--ring) 50%, transparent);
+}
+.btn__icon {
+	width: 1.05rem;
+	height: 1.05rem;
+	flex-shrink: 0;
+}
+
+.btn--primary {
+	background: var(--primary);
+	color: var(--primary-foreground);
+	box-shadow: 0 6px 20px -8px color-mix(in oklab, var(--primary) 70%, transparent);
+}
+.btn--primary:hover {
+	color: var(--primary-foreground);
+	background: color-mix(in oklab, var(--primary) 92%, white);
+	box-shadow: 0 10px 28px -8px color-mix(in oklab, var(--primary) 75%, transparent);
+}
+/* Slow light sweep across the primary button. */
+.btn--primary::after {
+	content: '';
+	position: absolute;
+	inset: 0;
+	background-image: linear-gradient(
+		110deg,
+		transparent 35%,
+		color-mix(in oklab, var(--primary-foreground) 22%, transparent) 50%,
+		transparent 65%
+	);
+	background-size: 200% 100%;
+	animation: mh-shimmer 2.6s linear infinite;
+	pointer-events: none;
+}
+
+.btn--ghost {
+	background: color-mix(in oklab, var(--background) 40%, transparent);
+	color: var(--foreground);
+	border-color: color-mix(in oklab, var(--foreground) 22%, transparent);
+	backdrop-filter: blur(6px);
+	-webkit-backdrop-filter: blur(6px);
+}
+.btn--ghost:hover {
+	color: var(--foreground);
+	border-color: color-mix(in oklab, var(--foreground) 42%, transparent);
+	background: color-mix(in oklab, var(--foreground) 8%, transparent);
+}
+
+.btn--lg {
+	height: 3rem;
+	padding: 0 1.5rem;
+	font-size: 0.98rem;
+	border-radius: var(--radius-lg);
+}
+
+@keyframes mh-shimmer {
+	from {
+		background-position: 200% 0;
+	}
+	to {
+		background-position: -200% 0;
+	}
+}
+
+/* --- footer / statutory disclosures ---------------------------------------- */
+/* Required by the Companies (Trading Disclosures) Regulations 2008, and the
+   details Apple and Google check during organisation verification. */
+.site-footer {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: flex-end;
+	justify-content: space-between;
+	gap: 0.75rem 2rem;
+	font-size: 0.78rem;
+	line-height: 1.7;
+	color: var(--muted-foreground);
+}
+.site-footer p {
+	margin: 0;
+	max-width: 34rem;
+}
+.site-footer a {
+	color: var(--muted-foreground);
+	font-weight: 500;
+}
+.site-footer a:hover {
+	color: var(--foreground);
+}
+.site-footer__links {
+	display: flex;
+	gap: 1.25rem;
+	margin-left: auto;
+	text-align: right;
+}
+
+/* --- entrance animation --------------------------------------------------- */
+.eyebrow,
+.hero__title,
+.hero__lead,
+.pills,
+.hero__actions {
+	animation: mh-rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.hero__title {
+	animation-delay: 0.06s;
+}
+.hero__lead {
+	animation-delay: 0.12s;
+}
+.pills {
+	animation-delay: 0.2s;
+}
+.hero__actions {
+	animation-delay: 0.26s;
+}
+@keyframes mh-rise {
+	from {
+		opacity: 0;
+		transform: translateY(14px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+/* --- responsive ----------------------------------------------------------- */
+@media screen and (max-width: 48em) {
+	.nav-link {
+		display: none;
+	}
+	.hero {
+		padding-top: 2rem;
+	}
+	.site-footer__links {
+		margin-left: 0;
+		text-align: left;
+	}
+	/* On narrow screens the field sits behind the copy, so wash the whole
+	   viewport top-down instead of left-right — lightly, or the field
+	   disappears entirely at phone widths. */
+	.scrim {
+		background: linear-gradient(
+			180deg,
+			color-mix(in oklab, var(--background) 72%, transparent) 0%,
+			color-mix(in oklab, var(--background) 60%, transparent) 48%,
+			color-mix(in oklab, var(--background) 86%, transparent) 100%
+		);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.bg-aurora .blob {
+		animation: none;
+	}
+	.btn--primary::after {
+		display: none;
+	}
+	.eyebrow,
+	.hero__title,
+	.hero__lead,
+	.pills,
+	.hero__actions {
+		animation: none;
+	}
+}
