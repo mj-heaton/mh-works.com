@@ -1,0 +1,96 @@
+/* MH Works Ltd — statutory trading disclosures and legal pages.
+   Layered on top of base.css. Adds the company details required by the
+   Companies (Trading Disclosures) Regulations 2008, which are also what
+   Apple Developer Program and Google Play check during organisation
+   verification. Deliberately does not alter the existing design. */
+
+/* ---------- statutory block on the landing page ---------- */
+.frame__legal {
+	margin-top: 2.5rem;
+	font-size: 0.7rem;
+	line-height: 1.75;
+	color: rgba(255, 255, 255, 0.42);
+	max-width: 34rem;
+}
+.frame__legal p { margin: 0; }
+.frame__legal-links { margin-top: 0.5rem !important; }
+.frame__legal-links a { margin-right: 1rem; }
+
+@media screen and (min-width: 53em) {
+	.frame__legal {
+		grid-area: demos;
+		justify-self: end;
+		text-align: right;
+		margin-top: 0;
+		pointer-events: auto;
+	}
+}
+
+/* ---------- legal pages (privacy, terms) ---------- */
+/* These pages must scroll, so they do not load demo1.css. */
+body.legal {
+	background-color: var(--color-bg, #0e0e0f);
+	overflow: auto;
+	cursor: auto;
+}
+
+.legal__wrap {
+	max-width: 44rem;
+	margin: 0 auto;
+	padding: 3rem 5vw 5rem;
+}
+
+.legal__back {
+	display: inline-block;
+	font-size: 0.8rem;
+	text-transform: lowercase;
+	margin-bottom: 2.5rem;
+}
+
+.legal__wrap h1 {
+	font-size: 2.25rem;
+	font-weight: normal;
+	margin: 0 0 0.5rem;
+}
+.legal__stamp {
+	font-size: 0.75rem;
+	color: rgba(255, 255, 255, 0.4);
+	margin: 0 0 2.5rem;
+}
+
+.legal__wrap h2 {
+	font-size: 1.15rem;
+	font-weight: normal;
+	margin: 2.75rem 0 0;
+	padding-top: 1.5rem;
+	border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+.legal__wrap h3 {
+	font-size: 0.95rem;
+	font-weight: bold;
+	margin: 1.75rem 0 0;
+}
+
+.legal__wrap p,
+.legal__wrap li {
+	color: rgba(255, 255, 255, 0.68);
+	font-size: 0.92rem;
+	line-height: 1.7;
+	margin: 1rem 0 0;
+}
+.legal__wrap ul {
+	margin: 1rem 0 0;
+	padding-left: 1.2rem;
+}
+.legal__wrap strong { color: #fff; }
+
+.legal__wrap a { text-transform: none; }
+
+.legal__foot {
+	margin-top: 3.5rem;
+	padding-top: 1.5rem;
+	border-top: 1px solid rgba(255, 255, 255, 0.12);
+	font-size: 0.72rem;
+	line-height: 1.75;
+	color: rgba(255, 255, 255, 0.42);
+}
