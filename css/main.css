@@ -86,6 +86,14 @@ a:hover,
 a:focus-visible {
 	color: color-mix(in oklab, var(--primary) 80%, white);
 }
+/* The rule above clears the browser's own focus ring, and only .btn drew a
+   replacement — which left keyboard users with no visible focus on plain
+   links. .btn:focus-visible is more specific, so buttons keep their own. */
+a:focus-visible {
+	outline: 2px solid var(--ring);
+	outline-offset: 3px;
+	border-radius: 2px;
+}
 
 /* ==========================================================================
    Background stack

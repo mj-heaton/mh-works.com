@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Coniuga! | Italian practice for iPhone and Android | MH Works Ltd</title>
+		<meta
+			name="description"
+			content="Coniuga! — 992 Italian verbs, every form voiced. A standalone Italian practice game for iPhone and Android: no account, no ads, no tracking, works offline."
+		/>
+		<meta name="author" content="MH Works Ltd" />
+		<link rel="canonical" href="https://mh-works.com/coniuga.html" />
+
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content="Coniuga! — 992 Italian verbs, every form voiced" />
+		<meta
+			property="og:description"
+			content="A standalone Italian practice game for iPhone and Android. No account, no ads, no tracking, and it works offline."
+		/>
+		<meta property="og:url" content="https://mh-works.com/coniuga.html" />
+
+		<link rel="icon" type="image/svg+xml" href="favicon.svg" />
+		<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
+		<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
+		<link rel="shortcut icon" href="favicon.ico" />
+		<link rel="apple-touch-icon" href="apple-touch-icon.png" />
+		<link rel="manifest" href="site.webmanifest" />
+		<meta name="theme-color" content="#0d1117" />
+
+		<!-- Inter is self-hosted from /fonts, so this page contacts no third party. -->
+		<link rel="preload" as="font" type="font/woff2" href="fonts/inter-latin.woff2" crossorigin />
+		<link rel="stylesheet" type="text/css" href="css/main.css" />
+		<link rel="stylesheet" type="text/css" href="css/doc.css" />
+		<script type="application/ld+json">
+			{
+				"@context": "https://schema.org",
+				"@type": "SoftwareApplication",
+				"name": "Coniuga!",
+				"applicationCategory": "EducationalApplication",
+				"applicationSubCategory": "Language learning",
+				"operatingSystem": "iOS, Android",
+				"inLanguage": "en-GB",
+				"teaches": "Italian",
+				"isFamilyFriendly": true,
+				"url": "https://mh-works.com/coniuga.html",
+				"publisher": {
+					"@type": "Organization",
+					"name": "MH Works Ltd",
+					"legalName": "MH WORKS LTD",
+					"url": "https://mh-works.com/",
+					"email": "matthew@mh-works.com"
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<!-- Same backdrop as the splash page, without the WebGL particle field:
+		     these pages have to scroll and stay readable for minutes at a time. -->
+		<div class="bg-aurora" aria-hidden="true">
+			<span class="blob blob--1"></span>
+			<span class="blob blob--2"></span>
+			<span class="blob blob--3"></span>
+		</div>
+		<div class="bg-grid" aria-hidden="true"></div>
+		<div class="scrim scrim--doc" aria-hidden="true"></div>
+
+		<div class="page page--doc">
+			<header class="site-header">
+				<a class="brand" href="/" aria-label="MH Works Ltd">
+					<svg class="brand__mark" viewBox="0 0 64 64" aria-hidden="true">
+						<defs>
+							<linearGradient id="mhA" x1="0" y1="0" x2="1" y2="1">
+								<stop offset="0" stop-color="#7df0ff" />
+								<stop offset="1" stop-color="#22d3ee" />
+							</linearGradient>
+							<linearGradient id="mhB" x1="1" y1="0" x2="0" y2="1">
+								<stop offset="0" stop-color="#a855f7" />
+								<stop offset="1" stop-color="#e935e0" />
+							</linearGradient>
+							<clipPath id="mhOverHead">
+								<rect x="15" y="0" width="28" height="32" />
+							</clipPath>
+						</defs>
+						<!-- Two interlocking links, as on the splash page. The casing strokes are
+						     the page ground, so each link passes in front of the other once. -->
+						<g fill="none" stroke-width="8">
+							<rect x="8" y="20" width="32" height="24" rx="12" stroke="url(#mhA)" />
+							<rect
+								x="24"
+								y="20"
+								width="32"
+								height="24"
+								rx="12"
+								stroke="var(--background)"
+								stroke-width="14"
+							/>
+							<rect x="24" y="20" width="32" height="24" rx="12" stroke="url(#mhB)" />
+							<g clip-path="url(#mhOverHead)">
+								<rect
+									x="8"
+									y="20"
+									width="32"
+									height="24"
+									rx="12"
+									stroke="var(--background)"
+									stroke-width="14"
+								/>
+								<rect x="8" y="20" width="32" height="24" rx="12" stroke="url(#mhA)" />
+							</g>
+						</g>
+					</svg>
+					<span class="brand__name">MH Works</span>
+				</a>
+				<nav class="site-nav" aria-label="Site">
+					<a class="nav-link" href="games.html" aria-current="page">Games</a>
+					<a class="nav-link" href="privacy.html">Privacy</a>
+					<a class="nav-link" href="terms.html">Terms</a>
+					<a class="btn btn--primary" href="mailto:matthew@mh-works.com">
+						<svg
+							class="btn__icon"
+							viewBox="0 0 24 24"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="2"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							aria-hidden="true"
+						>
+							<rect x="2" y="4" width="20" height="16" rx="2" />
+							<path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+						</svg>
+						Contact
+					</a>
+				</nav>
+			</header>
+
+			<main class="doc">
+				<h1 class="doc__title">Coniuga!</h1>
+				<p class="doc__stamp">992 Italian verbs, every form voiced &middot; iPhone and Android</p>
+
+				<p class="doc__lead">
+					Coniuga! is conjugation practice built on a verb list in frequency
+					order, so the verbs you meet first are the ones you are most likely to
+					need first. Every form is voiced by a native speaker, so a conjugation
+					is something you learn to hear rather than only to spell.
+				</p>
+
+				<div class="doc__note">
+					<p>
+						<strong>Coniuga! is not released yet.</strong> When it is on the App Store and
+						Google Play, the links will be on this page. Until then there is deliberately
+						nothing here pretending otherwise: no screenshots, no reviews, and no download
+						buttons that lead nowhere.
+					</p>
+				</div>
+
+				<h2>What you practise</h2>
+				<ul>
+					<li><strong>992 verbs in frequency order</strong>, the commonest first, so the
+						early practice is the practice that pays.</li>
+					<li><strong>Every form voiced</strong> by a native speaker, the infinitive
+						included, so you hear a conjugation rather than reading it.</li>
+					<li><strong>Irregulars and reflexives</strong> drilled alongside the regular
+						patterns instead of being kept in a box of their own.</li>
+					<li><strong>Six worlds</strong> to work through, so there is a reason to come
+						back to a drill that would otherwise be a list.</li>
+				</ul>
+
+				<h2>How it behaves on your device</h2>
+				<ul>
+					<li><strong>No account and no sign-in.</strong> Install it and play.</li>
+					<li>
+						<strong>Works offline.</strong> Every question and every recording is built into
+						the app, so the game itself never needs a connection. Nothing to download, and
+						no server of ours that can be down.
+					</li>
+					<li>
+						<strong>No ads, no tracking, no advertising identifiers</strong> and no
+						analytics watching how you play.
+					</li>
+					<li>
+						<strong>One purchase, not a subscription.</strong> The download is free, and a
+						single in-app purchase unlocks the full content.
+					</li>
+				</ul>
+				<p>
+					Your progress and your settings are held on your device and nowhere else. That
+					cuts both ways: they are nobody else's business, and they stay on that phone. A
+					new phone starts you fresh unless your own device backup happens to carry the
+					app's data across.
+				</p>
+
+				<h2>What it costs</h2>
+				<p>
+					Coniuga! is free to download. One in-app purchase, <strong>£6.99</strong> in
+					the UK and priced by the store in your own currency elsewhere, unlocks the full
+					content permanently. It is a one-off purchase rather than a subscription, and
+					there is nothing further to buy.
+				</p>
+				<p>
+					Apple and Google take the payment and are the merchant of record, so the store
+					shows you the exact price before you confirm anything and MH Works never sees your
+					card details. The <a href="coniuga-support.html">support page</a> covers restoring
+					a purchase and how refunds work.
+				</p>
+
+				<h2>Privacy, in one paragraph</h2>
+				<p>
+					Coniuga! has no accounts and collects no personal data. It carries no ads, no
+					tracking and no advertising identifiers, and nothing about you is sold or shared
+					with anyone, because there is nothing to sell. The only thing the app itself ever
+					sends over a network is a crash report when it breaks, so the fault can be found
+					and fixed. Those reports carry no identity and no IP address, and you can switch
+					them off in the app's settings. The
+					<a href="coniuga-privacy.html">Coniuga! privacy policy</a> sets all of that out in
+					full, including what a crash report does and does not contain.
+				</p>
+
+				<h2>Details</h2>
+				<dl class="doc__facts">
+					<dt>Published by</dt>
+					<dd>MH WORKS LTD, registered in England and Wales, company number 15932874</dd>
+					<dt>Platforms</dt>
+					<dd>iOS and Android</dd>
+					<dt>Application ID</dt>
+					<dd><code>com.mhworks.coniuga</code></dd>
+					<dt>Price</dt>
+					<dd>Free to download, with one optional in-app purchase at £6.99 in the UK</dd>
+					<dt>Personal data collected</dt>
+					<dd>None</dd>
+					<dt>Internet connection</dt>
+					<dd>Not needed to play</dd>
+					<dt>Audience</dt>
+					<dd>General audience, suitable for all ages, not directed at children</dd>
+					<dt>Support</dt>
+					<dd><a href="mailto:matthew@mh-works.com">matthew@mh-works.com</a></dd>
+				</dl>
+
+				<div class="doc__actions">
+					<a class="btn btn--primary" href="coniuga-support.html">Support and FAQ</a>
+					<a class="btn btn--ghost" href="coniuga-privacy.html">Privacy policy</a>
+					<a class="btn btn--ghost" href="games.html">Both games</a>
+				</div>
+			</main>
+
+			<footer class="site-footer">
+				<p>
+					MH Works Ltd is a company registered in England and Wales under company number
+					<a
+						href="https://find-and-update.company-information.service.gov.uk/company/15932874"
+						rel="noopener noreferrer"
+						target="_blank"
+						>15932874</a
+					>. Registered office: 20 Westbourne Park, Scarborough, England,
+					YO12 4AT.
+				</p>
+				<p class="site-footer__links">
+					<a href="games.html">Games</a>
+					<a href="privacy.html">Privacy</a>
+					<a href="terms.html">Terms</a>
+				</p>
+			</footer>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,309 @@
+/* ==========================================================================
+   MH Works Ltd — document pages (app pages, support pages, app policies)
+   Layered on css/main.css, so these pages inherit the splash page's type
+   system, oklch palette, tokens, buttons and page furniture unchanged. This
+   file only adds what a page of running text needs and the splash page never
+   did: a scrolling measure, long-form text styles, and a few small blocks.
+
+   These pages deliberately do NOT mount the WebGL particle field. They have
+   to scroll and stay readable for minutes at a time, so they keep only the
+   cheap CSS backdrop main.css already defines — aurora, dot grid, scrim.
+   ========================================================================== */
+
+/* --- page shell ----------------------------------------------------------- */
+/* main.css makes .page transparent to pointer events so the particle field
+   underneath stays draggable. There is no field on these pages, so take the
+   events back rather than opting every child in one by one. */
+.page--doc {
+	pointer-events: auto;
+	align-items: start;
+}
+
+/* The splash scrim is a left-to-right wash sized for the hero. A page of body
+   copy needs an even one, so no line of text ever crosses a bright blob. It is
+   pitched to leave the aurora legible as a tint — enough that this reads as the
+   same site as the splash page — while keeping body text comfortably past
+   WCAG AA on the lightest ground the blobs produce. */
+.scrim--doc {
+	background: linear-gradient(
+		180deg,
+		color-mix(in oklab, var(--background) 60%, transparent) 0%,
+		color-mix(in oklab, var(--background) 80%, transparent) 45%,
+		color-mix(in oklab, var(--background) 90%, transparent) 100%
+	);
+}
+
+/* --- the document column -------------------------------------------------- */
+.doc {
+	width: 100%;
+	max-width: 44rem;
+	margin: 0 auto;
+	padding: clamp(1.75rem, 5vh, 3.25rem) 0 clamp(2.5rem, 6vh, 4rem);
+}
+
+.doc__title {
+	margin: 0 0 0.55rem;
+	font-size: clamp(1.95rem, 4.4vw, 2.85rem);
+	font-weight: 600;
+	line-height: 1.06;
+	letter-spacing: -0.03em;
+	text-wrap: balance;
+}
+
+/* Date stamp under a policy title, and the "applies to" line under an app
+   title. Same role: quiet metadata about the page itself.
+
+   Both of these are <p> elements, so they are qualified with .doc to outweigh
+   the `.doc p` prose rule further down, which would otherwise win on
+   specificity and repaint them in the body colour. */
+.doc .doc__stamp {
+	margin: 0 0 2.25rem;
+	font-size: 0.78rem;
+	line-height: 1.6;
+	color: var(--muted-foreground);
+}
+
+.doc .doc__lead {
+	margin: 0 0 1.6rem;
+	font-size: clamp(1rem, 1.4vw, 1.14rem);
+	line-height: 1.65;
+	color: color-mix(in oklab, var(--foreground) 88%, transparent);
+}
+
+.doc h2 {
+	margin: 2.6rem 0 0;
+	padding-top: 1.5rem;
+	border-top: 1px solid color-mix(in oklab, var(--border) 75%, transparent);
+	font-size: 1.18rem;
+	font-weight: 600;
+	letter-spacing: -0.015em;
+	line-height: 1.3;
+}
+.doc h3 {
+	margin: 1.8rem 0 0;
+	font-size: 1rem;
+	font-weight: 600;
+	line-height: 1.4;
+}
+
+.doc p,
+.doc li {
+	font-size: 0.95rem;
+	line-height: 1.72;
+	color: color-mix(in oklab, var(--foreground) 78%, transparent);
+}
+.doc p {
+	margin: 0.95rem 0 0;
+}
+.doc ul,
+.doc ol {
+	margin: 0.95rem 0 0;
+	padding-left: 1.35rem;
+}
+.doc li {
+	margin: 0;
+}
+.doc li + li {
+	margin-top: 0.5rem;
+}
+.doc strong {
+	color: var(--foreground);
+	font-weight: 600;
+}
+
+/* Application identifiers are the only monospace these pages need. */
+.doc code {
+	font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
+	font-size: 0.86em;
+	padding: 0.1em 0.35em;
+	background: color-mix(in oklab, var(--foreground) 8%, transparent);
+	border: 1px solid color-mix(in oklab, var(--border) 60%, transparent);
+	border-radius: 4px;
+	overflow-wrap: break-word;
+}
+
+/* Colour alone should not be what marks a link inside a paragraph. Nav links
+   and buttons keep main.css's clean, undecorated treatment. */
+.doc p a,
+.doc li a,
+.doc dd a,
+.doc__lead a {
+	text-decoration: underline;
+	text-decoration-thickness: 1px;
+	text-underline-offset: 0.18em;
+	text-decoration-color: color-mix(in oklab, var(--primary) 45%, transparent);
+}
+.doc p a:hover,
+.doc li a:hover,
+.doc dd a:hover,
+.doc__lead a:hover,
+.doc p a:focus-visible,
+.doc li a:focus-visible,
+.doc dd a:focus-visible,
+.doc__lead a:focus-visible {
+	text-decoration-color: currentColor;
+}
+
+/* A button or a card heading that happens to sit inside a list item is not a
+   prose link, so it keeps main.css's undecorated treatment. */
+.doc .btn,
+.doc .doc__card h2 a {
+	text-decoration: none;
+}
+
+/* --- summary panel -------------------------------------------------------- */
+/* Used once at the top of a policy, for the version a reader deserves before
+   the detail. Same translucent surface as .pill and .btn--ghost. */
+.doc__summary {
+	margin: 0 0 0.5rem;
+	padding: 1.15rem 1.35rem 1.3rem;
+	background: color-mix(in oklab, var(--background) 55%, transparent);
+	border: 1px solid color-mix(in oklab, var(--primary) 24%, var(--border));
+	border-radius: var(--radius-lg);
+	backdrop-filter: blur(6px);
+	-webkit-backdrop-filter: blur(6px);
+}
+.doc__summary h2 {
+	margin: 0;
+	padding-top: 0;
+	border-top: 0;
+	font-size: 0.78rem;
+	font-weight: 600;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	color: color-mix(in oklab, var(--primary) 78%, var(--foreground));
+}
+.doc__summary ul {
+	margin-top: 0.7rem;
+}
+
+/* --- key/value facts ------------------------------------------------------ */
+.doc__facts {
+	margin: 1.2rem 0 0;
+	display: grid;
+	grid-template-columns: minmax(7.5rem, 12rem) 1fr;
+	gap: 0.05rem 1.25rem;
+	font-size: 0.9rem;
+	line-height: 1.7;
+}
+.doc__facts dt {
+	padding: 0.45rem 0;
+	color: var(--muted-foreground);
+}
+.doc__facts dd {
+	margin: 0;
+	padding: 0.45rem 0;
+	color: color-mix(in oklab, var(--foreground) 82%, transparent);
+}
+@media screen and (max-width: 34em) {
+	.doc__facts {
+		grid-template-columns: 1fr;
+		gap: 0;
+	}
+	.doc__facts dt {
+		padding-bottom: 0;
+		font-size: 0.78rem;
+	}
+	.doc__facts dd {
+		padding-top: 0.15rem;
+		padding-bottom: 0.8rem;
+	}
+}
+
+/* --- release-status note -------------------------------------------------- */
+/* An unreleased app has to say so somewhere honest and unmissable. */
+.doc__note {
+	margin: 1.5rem 0 0;
+	padding: 0.9rem 1.15rem;
+	background: color-mix(in oklab, var(--background) 55%, transparent);
+	border: 1px solid color-mix(in oklab, var(--border) 85%, transparent);
+	border-left: 2px solid color-mix(in oklab, var(--primary) 60%, var(--border));
+	border-radius: var(--radius-md);
+}
+.doc__note p {
+	margin: 0;
+	font-size: 0.9rem;
+}
+.doc__note p + p {
+	margin-top: 0.6rem;
+}
+
+/* --- link rows and cards -------------------------------------------------- */
+.doc__actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.75rem;
+	margin: 1.6rem 0 0;
+}
+
+.doc__cards {
+	display: grid;
+	gap: 1rem;
+	margin: 1.75rem 0 0;
+	padding: 0;
+	list-style: none;
+}
+@media screen and (min-width: 46em) {
+	.doc__cards {
+		grid-template-columns: 1fr 1fr;
+	}
+}
+.doc__card {
+	display: flex;
+	flex-direction: column;
+	padding: 1.35rem 1.4rem 1.5rem;
+	background: color-mix(in oklab, var(--background) 55%, transparent);
+	border: 1px solid color-mix(in oklab, var(--border) 85%, transparent);
+	border-radius: var(--radius-lg);
+	backdrop-filter: blur(6px);
+	-webkit-backdrop-filter: blur(6px);
+	transition: border-color 0.15s ease, transform 0.15s ease;
+}
+.doc__card:hover {
+	border-color: color-mix(in oklab, var(--primary) 40%, var(--border));
+	transform: translateY(-2px);
+}
+.doc__card h2 {
+	margin: 0;
+	padding-top: 0;
+	border-top: 0;
+	font-size: 1.3rem;
+	letter-spacing: -0.02em;
+}
+.doc__card h2 a {
+	color: var(--foreground);
+}
+.doc__card h2 a:hover {
+	color: var(--primary);
+}
+.doc__card p {
+	flex: 1 1 auto;
+}
+.doc__card .doc__actions {
+	margin-top: 1.25rem;
+}
+
+/* --- foot ----------------------------------------------------------------- */
+.doc__foot {
+	margin: 3rem 0 0;
+	padding-top: 1.5rem;
+	border-top: 1px solid color-mix(in oklab, var(--border) 75%, transparent);
+	font-size: 0.8rem;
+	line-height: 1.75;
+	color: var(--muted-foreground);
+}
+.doc__foot p {
+	margin: 0;
+	font-size: inherit;
+	line-height: inherit;
+	color: inherit;
+}
+.doc__foot p + p {
+	margin-top: 0.6rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.doc__card:hover {
+		transform: none;
+	}
+}
