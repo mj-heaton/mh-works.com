@@ -116,7 +116,7 @@
 			<main class="doc">
 				<h1 class="doc__title">Coniuga! privacy policy</h1>
 				<p class="doc__stamp">
-					Last updated 18 August 2026 &middot; applies to Coniuga! for iOS and Android
+					Last updated 3 September 2026 &middot; applies to Coniuga! for iOS and Android
 					(com.mhworks.coniuga)
 				</p>
 
@@ -133,7 +133,9 @@
 						<li>
 							The only thing the app itself sends anywhere is a crash report when it fails,
 							so the fault can be found and fixed. Those reports carry no identity and no
-							IP address, and you can switch them off in the app's settings.
+							IP address, and you can switch them off in the app's settings. On Android,
+							Google's own purchase library also sends Google its own diagnostics; that
+							traffic is not ours and is described below.
 						</li>
 						<li>No ads, no tracking, no advertising identifiers, and nothing sold to anyone.</li>
 					</ul>
@@ -195,10 +197,12 @@
 					What the app does declare is the plumbing for two things, both of them described
 					in this policy. The first is selling you the unlock through the store, which is
 					also why the store listing shows that the app contains in-app purchases. The
-					second is network access, which is used for the crash reports described below
-					and for nothing else. Buying or restoring the unlock is carried out by the App
-					Store or Google Play through the operating system, rather than by the app
-					opening a connection of its own.
+					second is network access. We use it for the crash reports described below and
+					for nothing else. It is not used only by us, though: on Android the Google
+					Play billing library the app has to include sends Google diagnostics about
+					itself over the same permission, which is also described below. Buying or
+					restoring the unlock is carried out by the App Store or Google Play through the
+					operating system, rather than by the app opening a connection of its own.
 				</p>
 
 				<h2>What is stored on your device</h2>
@@ -228,11 +232,26 @@
 					impossible to find without them.
 				</p>
 				<p>
-					These reports are the only thing Coniuga! itself sends anywhere. There is one other
-					piece of network activity involved in using the app, and it is not ours: when you
-					buy or restore the unlock, Apple's or Google's purchase framework contacts their
-					own servers, exactly as it does for every paid app on the platform. We are not
-					party to that exchange beyond being told that the unlock is owned.
+					These reports are the only thing we send ourselves, and the only network activity
+					Coniuga! has any say over. There are two other pieces, both belonging to the
+					platform rather than to us.
+				</p>
+				<p>
+					The first is the purchase itself: when you buy or restore the unlock, Apple's or
+					Google's purchase framework contacts their own servers, exactly as it does for
+					every paid app on the platform. We are not party to that exchange beyond being
+					told that the unlock is owned.
+				</p>
+				<p>
+					The second is on Android only, and we would rather it were not there. To sell you
+					the unlock at all, the app has to include Google's Play billing library, and that
+					library sends Google diagnostics about its own behaviour — roughly a minute after
+					the app starts, whether or not you buy anything. It is Google's code reporting on
+					itself to Google, we cannot see what is in it, and we cannot remove it without
+					risking the purchase working at all. Google's handling of it is covered by their
+					own privacy policy, not this one. We would not have written this paragraph if we
+					could have written a shorter one, but it is what the app does, and this policy is
+					meant to describe that rather than the version of it we would prefer.
 				</p>
 
 				<h3>What a report contains</h3>
